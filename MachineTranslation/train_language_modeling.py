@@ -27,7 +27,7 @@ training_args = TrainingArguments(
     output_dir="./cyclberto",
     overwrite_output_dir=True,
     num_train_epochs=1,
-    per_gpu_train_batch_size=64,
+    per_device_train_batch_size=64,
     save_steps=10_000,
     save_total_limit=2,
 )
@@ -37,7 +37,6 @@ trainer = Trainer(
     args=training_args,
     data_collator=data_collator,
     train_dataset=dataset,
-    prediction_loss_only=True,
 )
 
 trainer.train()
