@@ -9,13 +9,13 @@ config = RobertaConfig(
     type_vocab_size=1,
 )
 
-tokenizer = RobertaTokenizerFast.from_pretrained("./cyclberto", max_len=512)
+tokenizer = RobertaTokenizerFast.from_pretrained("../models/cyclberto", max_len=512)
 model = RobertaForMaskedLM(config=config)
 
 
 dataset = LineByLineTextDataset(
     tokenizer=tokenizer,
-    file_path="./raw_datasets/cycl.txt",
+    file_path="../raw_datasets/cycl.txt",
     block_size=128,
 )
 
@@ -24,7 +24,7 @@ data_collator = DataCollatorForLanguageModeling(
 )
 
 training_args = TrainingArguments(
-    output_dir="./cyclberto",
+    output_dir="../models/cyclberto",
     overwrite_output_dir=True,
     num_train_epochs=1,
     per_device_train_batch_size=64,
@@ -41,4 +41,4 @@ trainer = Trainer(
 
 trainer.train()
 
-trainer.save_model("./cyclberto")
+trainer.save_model("../models/cyclberto")

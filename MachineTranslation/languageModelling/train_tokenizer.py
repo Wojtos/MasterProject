@@ -3,7 +3,7 @@ import os
 
 from transformers import RobertaConfig, RobertaTokenizerFast
 
-paths = ['./raw_datasets/cycl.txt']
+paths = ['../raw_datasets/cycl.txt']
 
 # Initialize a tokenizer
 tokenizer = ByteLevelBPETokenizer()
@@ -17,7 +17,7 @@ tokenizer.train(files=paths, vocab_size=52_000, special_tokens=[
     "<mask>",
 ])
 
-model_path = './cyclberto'
+model_path = '../models/cyclberto'
 if not os.path.exists(model_path):
     os.mkdir(model_path)
 tokenizer.save_model(model_path)

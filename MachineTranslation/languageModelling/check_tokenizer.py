@@ -3,8 +3,8 @@ from tokenizers.processors import BertProcessing
 
 
 tokenizer = ByteLevelBPETokenizer(
-    "./cyclberto/vocab.json",
-    "./cyclberto/merges.txt",
+    "../models/cyclberto/vocab.json",
+    "../models/cyclberto/merges.txt",
 )
 tokenizer._tokenizer.post_processor = BertProcessing(
     ("</s>", tokenizer.token_to_id("</s>")),
