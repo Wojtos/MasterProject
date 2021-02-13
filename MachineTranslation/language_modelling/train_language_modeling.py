@@ -9,7 +9,7 @@ config = RobertaConfig(
     type_vocab_size=1,
 )
 
-tokenizer = RobertaTokenizerFast.from_pretrained("../models/cyclberto", max_len=512)
+tokenizer = RobertaTokenizerFast.from_pretrained("../../models/cyclberto", max_len=512)
 model = RobertaForMaskedLM(config=config)
 
 
