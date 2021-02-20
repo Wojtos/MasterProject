@@ -5,3 +5,4 @@ venv
 logs
 lib
 copy_to_prometheus.sh
+__pycache__

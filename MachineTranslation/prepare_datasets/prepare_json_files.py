@@ -41,13 +41,16 @@ def prepare_json_file(
 
     filtered_cycl_dataset = [cycl_dataset[i] for i in indexes]
     filtered_english_dataset = [english_dataset[i] for i in indexes]
-    data = {}
-    translation = data['translation'] = {}
-    translation['cycl'] = filtered_cycl_dataset
-    translation['en'] = filtered_english_dataset
 
     with open(target_joined_dataset_json_path, 'w') as outfile:
-        json.dump(data, outfile)
+        for filtered_cycl_line, filtered_english_line in zip(filtered_cycl_dataset, filtered_english_dataset):
+            data = {}
+            translation = data['translation'] = {}
+            translation['cycl'] = filtered_cycl_line
+            translation['en'] = filtered_english_line
+
+            json.dump(data, outfile)
+            outfile.write('\n')
 
 
 prepare_json_translation_files(
