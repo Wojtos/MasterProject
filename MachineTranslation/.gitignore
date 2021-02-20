@@ -4,3 +4,4 @@ venv
 .idea
 logs
 lib
+copy_to_prometheus.sh
