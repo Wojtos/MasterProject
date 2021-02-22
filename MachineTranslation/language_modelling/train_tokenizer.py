@@ -12,7 +12,7 @@ paths = [
 tokenizer = ByteLevelBPETokenizer()
 
 # Customize training
-tokenizer.train(files=paths, vocab_size=52_000, special_tokens=[
+tokenizer.train(files=paths, vocab_size=42024, special_tokens=[
     "<s>",
     "<pad>",
     "</s>",
@@ -26,7 +26,7 @@ if not os.path.exists(model_path):
 tokenizer.save_model(model_path)
 
 config = RobertaConfig(
-    vocab_size=52_000
+    vocab_size=42024
 )
 
 tokenizer = RobertaTokenizerFast.from_pretrained(model_path, max_len=512)
