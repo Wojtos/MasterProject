@@ -305,14 +305,18 @@ def main():
         revision=model_args.model_revision,
         use_auth_token=True if model_args.use_auth_token else None,
     )
-    model = AutoModelForSeq2SeqLM.from_pretrained(
-        model_args.model_name_or_path,
-        from_tf=bool(".ckpt" in model_args.model_name_or_path),
-        config=config,
-        cache_dir=model_args.cache_dir,
-        revision=model_args.model_revision,
-        use_auth_token=True if model_args.use_auth_token else None,
-    )
+    if model_args.model_name_or_path:
+        model = AutoModelForSeq2SeqLM.from_pretrained(
+            model_args.model_name_or_path,
+            from_tf=bool(".ckpt" in model_args.model_name_or_path),
+            config=config,
+            cache_dir=model_args.cache_dir,
+            revision=model_args.model_revision,
+            use_auth_token=True if model_args.use_auth_token else None,
+        )
+    else:
+        logger.info("Training new model from scratch")
+        model = AutoModelForSeq2SeqLM.from_config(config)
 
     # Set decoder_start_token_id
     if model.config.decoder_start_token_id is None and isinstance(tokenizer, MBartTokenizer):
@@ -491,7 +495,7 @@ def main():
     if training_args.do_train:
         if last_checkpoint is not None:
             model_path = last_checkpoint
-        elif os.path.isdir(model_args.model_name_or_path):
+        elif model_args.model_name_or_path and os.path.isdir(model_args.model_name_or_path):
             model_path = model_args.model_name_or_path
         else:
             model_path = None
