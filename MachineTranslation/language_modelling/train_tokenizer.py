@@ -3,9 +3,11 @@ import os
 from transformers import RobertaConfig, RobertaTokenizerFast
 import argparse
 
+current_path, _ = os.path.split(os.path.realpath(__file__))
+current_path += '/'
 paths = [
-    '../raw_datasets/cycl-filtered.txt',
-    '../raw_datasets/english-filtered.txt',
+    current_path + '../raw_datasets/cycl-filtered.txt',
+    current_path + '../raw_datasets/english-filtered.txt',
 ]
 
 parser = argparse.ArgumentParser()
@@ -25,7 +27,7 @@ tokenizer.train(files=paths, vocab_size=args.vocab_size, special_tokens=[
     "<mask>",
 ])
 
-model_path = f'../models/{args.name}'
+model_path = f'{current_path}../models/{args.name}'
 if not os.path.exists(model_path):
     os.mkdir(model_path)
 tokenizer.save_model(model_path)

@@ -3,6 +3,7 @@ raw_datasets
 venv
 .idea
 logs
+archive_logs
 lib
 copy_to_prometheus.sh
 __pycache__
