@@ -44,6 +44,6 @@ def render_plots(
     plt.show()
 
 print_training_plots(
-    '../models/en_cycl_2021_05_11_05_52_15/trainer_state.json',
-    '../models/en_cycl_2021_05_16_16_58_34/trainer_state.json',
+    '../models/en_cycl_2021_opus_mt_en_de_transfer_learning_10/trainer_state.json',
+    '../models/en_cycl_2021_opus_mt_en_de_from_scratch_10/trainer_state.json',
 )
