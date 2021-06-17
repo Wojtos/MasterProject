@@ -1,7 +1,6 @@
 #!/bin/bash
 
 CUDA_LAUNCH_BLOCKING=1
-MAIN_DIRECTORY_PATH="$(pwd)/.."
 source ${MAIN_DIRECTORY_PATH}/venv/bin/activate
 python ${MAIN_DIRECTORY_PATH}/language_modelling/train_tokenizer.py --name 58101_tokenizer --vocab_size 58101
 python ${MAIN_DIRECTORY_PATH}/invokers/run_seq2seq.py \
@@ -15,7 +14,7 @@ python ${MAIN_DIRECTORY_PATH}/invokers/run_seq2seq.py \
     --target_lang cycl \
     --train_file ${MAIN_DIRECTORY_PATH}/raw_datasets/train.json \
     --validation_file ${MAIN_DIRECTORY_PATH}/raw_datasets/validation.json \
-    --output_dir ${MAIN_DIRECTORY_PATH}/models/opus_mt_en_de_train_from_scratch_3 \
+    --output_dir ${MAIN_DIRECTORY_PATH}/models/opus_mt_en_de_transfer_learning_10 \
     --per_device_train_batch_size=64 \
     --per_device_eval_batch_size=8 \
     --overwrite_output_dir \
