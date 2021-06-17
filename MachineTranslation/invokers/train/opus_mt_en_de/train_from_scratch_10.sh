@@ -1,7 +1,6 @@
 #!/bin/bash
 
 CUDA_LAUNCH_BLOCKING=1
-MAIN_DIRECTORY_PATH="$(pwd)/.."
 source ${MAIN_DIRECTORY_PATH}/venv/bin/activate
 python ${MAIN_DIRECTORY_PATH}/language_modelling/train_tokenizer.py --name 58101_tokenizer --vocab_size 58101
 python ${MAIN_DIRECTORY_PATH}/invokers/run_seq2seq.py \

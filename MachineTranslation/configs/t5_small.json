@@ -1,0 +1,26 @@
+{
+  "architectures": [
+    "T5WithLMHeadModel"
+  ],
+  "d_ff": 2048,
+  "d_kv": 64,
+  "d_model": 512,
+  "dropout_rate": 0.1,
+  "initializer_factor": 1.0,
+  "is_encoder_decoder": true,
+  "layer_norm_epsilon": 1e-06,
+  "model_type": "t5",
+  "n_positions": 512,
+  "num_heads": 8,
+  "num_layers": 6,
+  "output_past": true,
+  "relative_attention_num_buckets": 32,
+  "early_stopping": true,
+  "max_length": 300,
+  "num_beams": 4,
+  "vocab_size": 32128,
+
+  "bos_token_id": 0,
+  "pad_token_id": 1,
+  "eos_token_id": 2
+}
