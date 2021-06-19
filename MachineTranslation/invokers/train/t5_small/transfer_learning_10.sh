@@ -7,8 +7,8 @@ python ${MAIN_DIRECTORY_PATH}/invokers/run_seq2seq.py \
     --model_name_or_path ${MAIN_DIRECTORY_PATH}/models/t5_small_transfer_learning_3 \
     --config_name ${MAIN_DIRECTORY_PATH}/configs/t5_small.json \
     --tokenizer_name ${MAIN_DIRECTORY_PATH}/models/32128_tokenizer \
-    --do_train \
-    --do_eval \
+    --$1 \
+    --distributed_training \
     --task translation_en_to_cycl \
     --source_lang en \
     --target_lang cycl \
@@ -16,7 +16,7 @@ python ${MAIN_DIRECTORY_PATH}/invokers/run_seq2seq.py \
     --validation_file ${MAIN_DIRECTORY_PATH}/raw_datasets/validation.json \
     --output_dir ${MAIN_DIRECTORY_PATH}/models/t5_small_transfer_learning_10 \
     --per_device_train_batch_size=64 \
-    --per_device_eval_batch_size=8 \
+    --per_device_eval_batch_size=64 \
     --overwrite_output_dir \
     --predict_with_generate \
     --pad_to_max_length \

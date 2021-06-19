@@ -6,8 +6,7 @@ python ${MAIN_DIRECTORY_PATH}/language_modelling/train_tokenizer.py --name 32128
 python ${MAIN_DIRECTORY_PATH}/invokers/run_seq2seq.py \
     --config_name ${MAIN_DIRECTORY_PATH}/configs/t5_small.json \
     --tokenizer_name ${MAIN_DIRECTORY_PATH}/models/32128_tokenizer \
-    --do_train \
-    --do_eval \
+    --$1 \
     --task translation_en_to_cycl \
     --source_lang en \
     --target_lang cycl \
