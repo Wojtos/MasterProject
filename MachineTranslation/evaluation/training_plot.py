@@ -6,12 +6,15 @@ import json
 
 
 def print_training_plots(
+        plot_name,
         transfer_learning_filename,
         learning_from_scratch_filename,
 ):
     transfer_learning_log = read_json_training_log(transfer_learning_filename)
     learning_from_scratch_log = read_json_training_log(learning_from_scratch_filename)
-    render_plots(*transfer_learning_log, *learning_from_scratch_log)
+    print(transfer_learning_log)
+    print(learning_from_scratch_log)
+    render_plots(plot_name, *transfer_learning_log, *learning_from_scratch_log)
 
 
 def read_json_training_log(filename):
@@ -19,8 +22,8 @@ def read_json_training_log(filename):
     logs = json_data['log_history']
     logs = [log for log in logs if 'learning_rate' in log]
     epoch = [log['epoch'] for log in logs]
-    learning_rate = [log['learning_rate'] for log in logs]
-    return epoch, learning_rate
+    loss = [log['loss'] for log in logs]
+    return epoch, loss
 
 
 def read_json_file(filename):
@@ -29,6 +32,7 @@ def read_json_file(filename):
 
 
 def render_plots(
+    plot_name,
     transfer_learning_epochs,
     transfer_learning_learning_rates,
     learning_from_scratch_epochs,
@@ -41,9 +45,35 @@ def render_plots(
     ax.plot(learning_from_scratch_epochs, learning_from_scratch_learning_rates, color='red', label='Learning from scratch')
     plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc='lower left',
                ncol=2, mode="expand", borderaxespad=0.)
+    plt.title(f'{plot_name}')
+    plt.savefig(f'output/{plot_name}.png')
     plt.show()
 
-print_training_plots(
-    '../models/en_cycl_2021_opus_mt_en_de_transfer_learning_10/trainer_state.json',
-    '../models/en_cycl_2021_opus_mt_en_de_from_scratch_10/trainer_state.json',
-)
+
+plots_to_draw = {
+    'opus_mt_en_de': [
+        '../models_2021_06_26/opus_mt_en_de_transfer_learning_10/trainer_state.json',
+        '../models_2021_06_26/opus_mt_en_de_train_from_scratch_10/trainer_state.json',
+    ],
+    't5_small': [
+        '../models_2021_06_26/t5_small_transfer_learning_10/trainer_state.json',
+        '../models_2021_06_26/t5_small_train_from_scratch_10/trainer_state.json',
+    ],
+    't5_base': [
+        '../models_2021_06_26/t5_base_transfer_learning_3/trainer_state.json',
+        '../models_2021_06_26/t5_base_train_from_scratch_3/trainer_state.json',
+    ],
+    'opus_mt_de_en': [
+        '../models_2021_06_26/opus_mt_de_en_transfer_learning_3/trainer_state.json',
+        '../models_2021_06_26/opus_mt_de_en_train_from_scratch_3/trainer_state.json',
+    ]
+}
+
+
+for name in plots_to_draw:
+    paths = plots_to_draw[name]
+    print_training_plots(
+        name,
+        paths[0],
+        paths[1]
+    )
